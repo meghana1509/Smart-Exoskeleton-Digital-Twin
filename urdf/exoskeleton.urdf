@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<robot name="exoskeleton">
+
+  <link name="world"/>
+
+  <joint name="fixed" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 1.0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.2 0.4 0.1"/>
+      </geometry>
+      <material name="blue"><color rgba="0 0 1 1"/></material>
+    </visual>
+  </link>
+
+  <joint name="hip_joint" type="revolute">
+    <parent link="base_link"/>
+    <child link="thigh_link"/>
+    <origin xyz="0 0.15 -0.05" rpy="0 0 0"/> <axis xyz="0 1 0"/>
+    <limit lower="-1.57" upper="0.5" effort="100" velocity="1.0"/>
+  </joint>
+
+  <link name="thigh_link">
+    <visual>
+      <origin xyz="0 0 -0.225" rpy="0 0 0"/> <geometry>
+        <cylinder length="0.45" radius="0.05"/>
+      </geometry>
+      <material name="grey"><color rgba="0.5 0.5 0.5 1"/></material>
+    </visual>
+  </link>
+
+  <joint name="knee_joint" type="revolute">
+    <parent link="thigh_link"/>
+    <child link="shank_link"/>
+    <origin xyz="0 0 -0.45" rpy="0 0 0"/> <axis xyz="0 1 0"/>
+    <limit lower="0" upper="2.0" effort="100" velocity="1.0"/>
+  </joint>
+
+  <link name="shank_link">
+    <visual>
+      <origin xyz="0 0 -0.225" rpy="0 0 0"/> <geometry>
+        <cylinder length="0.45" radius="0.04"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+  </link>
+
+</robot>
